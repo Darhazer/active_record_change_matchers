@@ -15,7 +15,7 @@ module ActiveRecordChangeMatchers
       block.call
 
       classes.each_with_object({}) do |klass, new_records|
-        new_records[klass] = klass.where("#{column_name} > ?", time_before).to_a +
+        new_records[klass] = klass.where("#{column_name} > ?", time_before).to_a
         new_records[klass] += klass.where("#{column_name} = ?", time_before).where.not(klass.primary_key => existing_records[klass]).to_a
       end
     end

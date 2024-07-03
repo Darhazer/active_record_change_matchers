@@ -2,6 +2,9 @@
 
 ## Master (Unreleased)
 
+## 1.0.1 (2024-07-03)
+- Fix broken timestamp stategy after adding the frozen time support.
+
 ## 1.0.0 (2024-07-03)
 
 Hard fork. Changes since the original version:
