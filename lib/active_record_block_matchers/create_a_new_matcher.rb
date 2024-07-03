@@ -13,6 +13,10 @@ RSpec::Matchers.define :create_a_new do |klass|
     @which_block = block
   end
 
+  chain(:which_is_expected_to) do |matcher|
+    @which_matcher = matcher
+  end
+
   match do |options={}, block|
     fetching_strategy =
       ActiveRecordBlockMatchers::Strategies.for_key(options[:strategy]).new(block)
@@ -39,7 +43,13 @@ RSpec::Matchers.define :create_a_new do |klass|
       end
     end
 
-    @attribute_mismatches.empty? && @which_failure.nil?
+    if @attribute_mismatches.none? && @which_matcher
+      unless @which_matcher.matches?(record)
+        @matcher_failure = @which_matcher.failure_message
+      end
+    end
+
+    @attribute_mismatches.empty? && @which_failure.nil? && @matcher_failure.nil?
   end
 
   failure_message do
@@ -50,8 +60,10 @@ RSpec::Matchers.define :create_a_new do |klass|
         expected_description = is_composable_matcher?(expected) ? expected.description : expected.inspect
         "Expected #{field.inspect} to be #{expected_description}, but was #{actual.inspect}"
       end.join("\n")
-    else
+    elsif @which_failure
       @which_failure.message
+    else
+      @matcher_failure
     end
   end
 

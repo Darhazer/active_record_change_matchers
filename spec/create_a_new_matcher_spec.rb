@@ -56,6 +56,12 @@ RSpec.describe "`create_a_new` matcher" do
     expect(block_was_called).to be_truthy
   end
 
+  it "can chain `which_is_expected_to` that takes a matcher" do
+    expect { Person.create!(first_name: "Pam", last_name: "Greer") }
+      .to create_a_new(Person)
+      .which_is_expected_to(have_attributes(full_name: "Pam Greer"))
+  end
+
   it "is aliased as `create_a`" do
     expect { Person.create! }.to create_a(Person)
   end

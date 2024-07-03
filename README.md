@@ -85,7 +85,18 @@ expect { User.create!(username: "bob") }
   .with_attributes(username: a_string_starting_with("b"))
 ```
 
-If you need to make assertions about things other than attribute equality, you can also chain `.which` with a block, and your block will receive the newly created record:
+If you need to make assertions about things other than attribute equality, you can also chain `.which_is_expected_to` with a (composable) matcher:
+
+```ruby
+expect { User.create!(username: "BOB", password: "BlueSteel45") }
+  .to create_a(User)
+  .which_is_expected_to(
+    have_attributes(encrypted_password: be_present)
+    .and(eq(AuthLibrary.authenticate("bob", "BlueSteel45")))
+  )
+```
+
+If that's doesn't provide enough flexibility, you can also chain `.which` with a block, and your block will receive the newly created record:
 
 ```ruby
 expect { User.create!(username: "BOB", password: "BlueSteel45") }
