@@ -28,5 +28,14 @@ RSpec.shared_examples_for "a new records strategy" do
       records = subject.new_records([Person])
       expect(records).to eq(Person => [])
     end
+
+    it "works with a frozen time" do
+      Timecop.freeze do
+        Person.create!
+        subject = described_class.new(-> { Person.create! })
+        records = subject.new_records([Person])
+        expect(records).to match(Person => [an_instance_of(Person)])
+      end
+    end
   end
 end
