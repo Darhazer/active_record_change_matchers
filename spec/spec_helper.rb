@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
-require "active_record_block_matchers"
+require "active_record_change_matchers"
 require "sqlite3"
 require "database_cleaner"
 require "pry"
@@ -13,7 +13,7 @@ ActiveRecord::Base.establish_connection(db_config)
 Dir[File.join(File.dirname(__FILE__), "support", "**", "*.rb")].each {|f| require f }
 
 RSpec.configure do |config|
-  config.include ActiveRecordBlockMatchers::SpecUtilities
+  config.include ActiveRecordChangeMatchers::SpecUtilities
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)

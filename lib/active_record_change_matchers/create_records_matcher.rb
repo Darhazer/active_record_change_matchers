@@ -22,7 +22,7 @@ RSpec::Matchers.define :create_records do |record_counts|
 
   match do |options={}, block|
     fetching_strategy =
-      ActiveRecordBlockMatchers::Strategies.for_key(options[:strategy]).new(block)
+      ActiveRecordChangeMatchers::Strategies.for_key(options[:strategy]).new(block)
 
     @new_records = fetching_strategy.new_records(record_counts.keys)
 

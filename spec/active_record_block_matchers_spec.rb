@@ -1,7 +1,7 @@
 require "spec_helper"
 
-RSpec.describe ActiveRecordBlockMatchers do
+RSpec.describe ActiveRecordChangeMatchers do
   it "has a version number" do
-    expect(ActiveRecordBlockMatchers::VERSION).not_to be nil
+    expect(ActiveRecordChangeMatchers::VERSION).not_to be nil
   end
 end

@@ -1,6 +1,6 @@
 require "spec_helper"
 
-RSpec.describe ActiveRecordBlockMatchers::Config do
+RSpec.describe ActiveRecordChangeMatchers::Config do
 
   {
     default_strategy: :id,

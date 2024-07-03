@@ -1,16 +1,14 @@
-# Build Status
-[![Build Status](https://travis-ci.org/nwallace/active_record_block_matchers.svg)](https://travis-ci.org/nwallace/active_record_block_matchers)
+# active_record_change_matchers
 
-# ActiveRecordBlockMatchers
-
-Custom RSpec matchers for ActiveRecord record creation
+Custom RSpec matchers for ActiveRecord record creation.
+This is a hard-fork of [active_record_block_matchers](https://github.com/nwallace/active_record_block_matchers). See [the changelog](CHANGELOG.md) for changes since the original gem was written.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'active_record_block_matchers'
+gem 'active_record_change_matchers'
 ```
 
 And then execute:
@@ -19,7 +17,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install active_record_block_matchers
+    $ gem install active_record_change_matchers
 
 ## Quick Examples
 
@@ -178,7 +176,7 @@ The ID Strategy is the default because it doesn't rely on time values that may b
 You can configure the column names used by the ID or Timestamp Strategies. Put code like this in your `spec_helper.rb` or similar file:
 
 ```ruby
-ActiveRecordBlockMatchers::Config.configure do |config|
+ActiveRecordChangeMatchers::Config.configure do |config|
 
   # default value is "id"
   config.id_column_name = "primary_key"
@@ -195,7 +193,6 @@ end
 You can also override the default strategy for individual assertions if needed:
 
 ```ruby
-Timecop.freeze
 expect { Person.create! }.to create_a(Person, strategy: :id)
 ```
 
@@ -208,7 +205,7 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/active_record_block_matchers/fork )
+1. Fork it ( https://github.com/[my-github-username]/active_record_change_matchers/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

@@ -1,4 +1,4 @@
-module ActiveRecordBlockMatchers
+module ActiveRecordChangeMatchers
   module SpecUtilities
     def capture_error
       begin

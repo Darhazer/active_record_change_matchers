@@ -19,7 +19,7 @@ RSpec::Matchers.define :create_a_new do |klass|
 
   match do |options={}, block|
     fetching_strategy =
-      ActiveRecordBlockMatchers::Strategies.for_key(options[:strategy]).new(block)
+      ActiveRecordChangeMatchers::Strategies.for_key(options[:strategy]).new(block)
 
     @created_records = fetching_strategy.new_records([klass])[klass]
 
@@ -34,7 +34,7 @@ RSpec::Matchers.define :create_a_new do |klass|
         @attribute_mismatches << [field, value, record.public_send(field)]
       end
     end
-
+ 
     if @attribute_mismatches.none? && @which_block
       begin
         @which_block.call(record)

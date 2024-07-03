@@ -1,4 +1,4 @@
-module ActiveRecordBlockMatchers
+module ActiveRecordChangeMatchers
   class Strategies
 
     def self.all_strategies

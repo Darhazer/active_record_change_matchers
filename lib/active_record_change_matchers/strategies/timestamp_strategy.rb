@@ -1,4 +1,4 @@
-module ActiveRecordBlockMatchers
+module ActiveRecordChangeMatchers
   class TimestampStrategy
 
     def initialize(block)
@@ -25,7 +25,8 @@ module ActiveRecordBlockMatchers
     attr_reader :block
 
     def column_name
-      @column_name ||= ActiveRecordBlockMatchers::Config.created_at_column_name
+      @column_name ||= ActiveRecordChangeMatchers::Config.created_at_column_name
     end
+    
   end
 end

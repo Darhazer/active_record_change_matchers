@@ -1,4 +1,4 @@
-module ActiveRecordBlockMatchers
+module ActiveRecordChangeMatchers
   class Config
 
     def self.configure

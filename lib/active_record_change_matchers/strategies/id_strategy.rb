@@ -1,4 +1,4 @@
-module ActiveRecordBlockMatchers
+module ActiveRecordChangeMatchers
   class IdStrategy
 
     def initialize(block)
@@ -23,7 +23,7 @@ module ActiveRecordBlockMatchers
     attr_reader :block
 
     def column_name
-      @column_name ||= ActiveRecordBlockMatchers::Config.id_column_name
+      @column_name ||= ActiveRecordChangeMatchers::Config.id_column_name
     end
   end
 end
