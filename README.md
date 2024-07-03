@@ -77,7 +77,7 @@ expect { User.create!(username: "BOB") }
   .with_attributes(username: "bob")
 ```
 
-You can even use RSpec's [composable matchers][1]:
+You can even use RSpec's [composable matchers][^1]:
 
 ```ruby
 expect { User.create!(username: "bob") }
@@ -204,4 +204,4 @@ To install this gem onto your local machine, run `bundle exec rake install`.
 5. Create a new Pull Request
 
 
-[1]: https://www.relishapp.com/rspec/rspec-expectations/v/3-3/docs/composing-matchers
+[^1]: https://rspec.info/features/3-13/rspec-expectations/composing-matchers/
