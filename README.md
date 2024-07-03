@@ -23,7 +23,7 @@ Or install it yourself as:
 
 ## Quick Examples
 
-```
+```ruby
 expect {
   post :create, user: { username: "bob", password: "BlueSteel45" }
 }.to create_a(User)
@@ -167,7 +167,7 @@ The ID Strategy is the default because it doesn't rely on time values that may b
 You can configure the column names used by the ID or Timestamp Strategies. Put code like this in your `spec_helper.rb` or similar file:
 
 ```ruby
-ActiveRecordBlockMatchers.configure do |config|
+ActiveRecordBlockMatchers::Config.configure do |config|
 
   # default value is "id"
   config.id_column_name = "primary_key"
