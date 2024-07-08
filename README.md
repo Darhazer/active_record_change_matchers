@@ -105,7 +105,8 @@ expect { User.create!(username: "BOB", password: "BlueSteel45") }
   }
 ```
 
-**Gotcha Warning:** Be careful about your block syntax when chaining `.which` in your tests. If you write the above example with a `do...end`, the example will parse like this: `expect {...}.to(create_a(User).which) do |user| ... end`, so your block will not execute, and it may appear that your test is passing, when it is not.
+> [!WARNING]
+> Be careful about your block syntax when chaining `.which` in your tests. If you write the above example with a `do...end`, the example will parse like this: `expect {...}.to(create_a(User).which) do |user| ... end`, so your block will not execute, and it may appear that your test is passing, when it is not.
 
 #### `create`
 
