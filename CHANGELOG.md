@@ -2,6 +2,8 @@
 
 ## Master (Unreleased)
 
+- Drop support for Rails < 7
+
 ## 1.0.1 (2024-07-03)
 - Fix broken timestamp stategy after adding the frozen time support.
 
