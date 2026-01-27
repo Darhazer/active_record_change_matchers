@@ -3,6 +3,7 @@
 ## Master (Unreleased)
 
 ## 1.0.1 (2026-01-27)
+- Add `create_associated(scope)` matcher: verifies creation of new record(s) within an association scope (e.g. `record.items`). Supports `with_attributes`, `which`, `and_return_it`, and `and_return_them`. Model class is inferred from the scope.
 - Add `and_return_it` / `and_return_them` modifiers.
 - Drop support for Rails < 7
 
