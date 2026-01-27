@@ -108,6 +108,26 @@ expect { User.create!(username: "BOB", password: "BlueSteel45") }
 > [!WARNING]
 > Be careful about your block syntax when chaining `.which` in your tests. If you write the above example with a `do...end`, the example will parse like this: `expect {...}.to(create_a(User).which) do |user| ... end`, so your block will not execute, and it may appear that your test is passing, when it is not.
 
+You can also chain `.and_return_it` to verify that the block returns the created record:
+
+```ruby
+expect { User.create! }.to create_a(User).and_return_it
+```
+
+This is useful when you want to ensure that the method being tested not only creates the record but also returns it:
+
+```ruby
+def create_user(params)
+  User.create!(params)
+end
+
+# In your test:
+expect { create_user(username: "bob") }
+  .to create_a(User)
+  .with_attributes(username: "bob")
+  .and_return_it
+```
+
 #### `create`
 
 aliases: `create_records`
@@ -163,6 +183,27 @@ expect { User.create!(username: "bob"); User.create!(username: "rhonda") }
     User => [{username: "rhonda"}, {}]
   )
 ```
+
+You can also chain `.and_return_them` to verify that the block returns the created records:
+
+```ruby
+expect { [User.create!, User.create!] }.to create(User => 2).and_return_them
+```
+
+This is useful when you want to ensure that the method being tested not only creates the records but also returns them:
+
+```ruby
+def create_users(count)
+  Array.new(count) { User.create! }
+end
+
+# In your test:
+expect { create_users(2) }
+  .to create(User => 2)
+  .and_return_them
+```
+
+The matcher will verify that all created records are present in the return value. The return value can be an array, ActiveRecord relation, or any enumerable collection.
 
 ## Record Retrieval Strategies
 

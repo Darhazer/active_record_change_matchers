@@ -2,6 +2,8 @@
 
 ## Master (Unreleased)
 
+## 1.0.1 (2026-01-27)
+- Add `and_return_it` / `and_return_them` modifiers.
 - Drop support for Rails < 7
 
 ## 1.0.1 (2024-07-03)
