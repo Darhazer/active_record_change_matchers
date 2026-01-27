@@ -39,6 +39,8 @@ expect {
     new_profile = new_records_hash[Profile].first
     expect(new_user.profile).to eq new_profile
   }
+
+expect { create_items }.to create_associated(record.items => 2).with_attributes([{ content: "item1" }, { content: "item2" }])
 ```
 
 ## Detailed Examples
@@ -204,6 +206,55 @@ expect { create_users(2) }
 ```
 
 The matcher will verify that all created records are present in the return value. The return value can be an array, ActiveRecord relation, or any enumerable collection.
+
+#### `create_associated`
+
+Verifies that new record(s) were created **within a given association scope**. The model class is inferred from the scope (e.g. `record.items` implies `Item`). Supports the same modifiers as `create` / `create_records`: `with_attributes`, `which`, `and_return_it` (when expecting one record), and `and_return_them`.
+
+**Scope form** (expects exactly one record):
+
+```ruby
+expect { call }.to create_associated(record.items)
+```
+
+**Hash form** (expects the given count per scope):
+
+```ruby
+expect { call }.to create_associated(record.items => 2)
+```
+
+**With attributes** (single record, single hash):
+
+```ruby
+expect { call }.to create_associated(record.items).with_attributes(latest_changes)
+```
+
+**With attributes and return value** (single record):
+
+```ruby
+expect { call }.to create_associated(record.items).with_attributes(latest_changes).and_return_it
+```
+
+**Multiple scopes**:
+
+```ruby
+expect { create_mine_and_theirs }.to create_associated(
+  user_a.items => 1,
+  user_b.items => 1
+).with_attributes(
+  user_a.items => [{ name: "a" }],
+  user_b.items => [{ name: "b" }]
+)
+```
+
+For a single scope expecting multiple records, pass an array of attribute hashes:
+
+```ruby
+expect { add_two_items }.to create_associated(record.items => 2)
+  .with_attributes([{ name: "v1" }, { name: "v2" }])
+```
+
+Use `.and_return_it` only when expecting exactly one record; use `.and_return_them` when expecting multiple. The `which` block receives a hash of model class => new records, same as `create` / `create_records`.
 
 ## Record Retrieval Strategies
 
